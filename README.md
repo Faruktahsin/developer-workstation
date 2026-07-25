@@ -2,6 +2,7 @@
 
 > A production-ready macOS developer workstation for Python, AI, Cloud, and Software Engineering.
 
+![CI](https://github.com/Faruktahsin/developer-workstation/actions/workflows/ci.yml/badge.svg)
 ![Platform](https://img.shields.io/badge/platform-macOS-black)
 ![Python](https://img.shields.io/badge/python-3.14+-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)

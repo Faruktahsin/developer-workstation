@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  validate:
+    name: Validate Shell Scripts
+    runs-on: macos-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install ShellCheck
+        run: brew install shellcheck
+
+      - name: Bash Syntax Check
+        run: |
+          find bootstrap scripts -name "*.sh" -print0 | while IFS= read -r -d '' file; do
+            echo "Checking syntax: $file"
+            bash -n "$file"
+          done
+
+      - name: ShellCheck
+        run: |
+          find bootstrap scripts -name "*.sh" -print0 | while IFS= read -r -d '' file; do
+            echo "Linting: $file"
+            shellcheck "$file"
+          done
