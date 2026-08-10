@@ -1,0 +1,16 @@
+# DevCompass Workstation — Data Science Brewfile
+# Foundation dependencies + Data Science Toolset
+
+# Include foundation packages
+brew "git"
+brew "curl"
+brew "wget"
+brew "jq"
+brew "shellcheck"
+brew "gh"
+brew "tree"
+
+# Data Science packages
+brew "python3"
+brew "pyenv"
+brew "jupyterlab"

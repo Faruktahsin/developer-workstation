@@ -1,0 +1,16 @@
+# DevCompass Workstation — Web Engineering Brewfile
+# Foundation dependencies + Web Development Toolset
+
+# Include foundation packages
+brew "git"
+brew "curl"
+brew "wget"
+brew "jq"
+brew "shellcheck"
+brew "gh"
+brew "tree"
+
+# Web Engineering packages
+brew "node"
+brew "yarn"
+brew "nvm"

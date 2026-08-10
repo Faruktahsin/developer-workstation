@@ -114,7 +114,7 @@ EOF
     local init_output
     init_output="$(echo "y" | "$CLI" init)"
 
-    assert_contains "$init_output" "DevCompass Workstation initialization complete" "Accepted init success header"
+    assert_contains "$init_output" "DevCompass initialization complete for profile 'foundation'" "Accepted init success header"
 
     git_content="$(cat "$git_config")"
     zsh_content="$(cat "$zsh_rc")"
@@ -169,7 +169,7 @@ EOF
     export TEST_BREW_BUNDLE_STATUS="success"
 
     assert_equals "1" "$brew_exit_code" "brew bundle failure causes devcompass init to exit code 1"
-    assert_contains "$brew_fail_output" "Foundation package installation failed via Homebrew bundle" "brew bundle failure error message"
+    assert_contains "$brew_fail_output" "Package installation failed for profile 'foundation' via Homebrew bundle" "brew bundle failure error message"
     assert_contains "$brew_fail_output" "Initialization incomplete" "Initialization incomplete notification"
 
     # --- 6. Test Xcode CLI missing stops installation sequencing ---

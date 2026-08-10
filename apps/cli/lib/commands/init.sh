@@ -3,21 +3,34 @@
 set -Eeuo pipefail
 
 cmd_init() {
-    local is_dry_run="${DEVCOMPASS_DRY_RUN:-false}"
-    local root_dir="${DEVCOMPASS_ROOT}"
-    local target_home
-    target_home="$(get_home_dir)"
-
-    log_bold "🚀 DevCompass Workstation Initialization"
-    echo "=================================================="
-
-    # Pre-flight platform guard
     if ! is_macos; then
-        log_error "DevCompass init requires macOS."
+        log_error "DevCompass init is macOS-only."
         return 2
     fi
 
-    log_info "Building initialization plan (Foundation Profile)..."
+    local selected_profile="${DEVCOMPASS_PROFILE:-foundation}"
+    local root_dir="${DEVCOMPASS_ROOT}"
+    local target_home
+    target_home="$(get_home_dir)"
+    local is_dry_run="${DEVCOMPASS_DRY_RUN:-false}"
+
+    local profiles_dir
+    profiles_dir="$(get_profiles_dir)"
+    local profile_yaml="${profiles_dir}/${selected_profile}.yaml"
+
+    if [[ ! -f "$profile_yaml" ]] || ! validate_profile_file "$profile_yaml"; then
+        log_error "Invalid or unknown profile '$selected_profile'."
+        log_info "Run 'devcompass profile list' to view valid workspace profiles."
+        return 1
+    fi
+
+    local profile_display_name
+    profile_display_name="$(get_profile_field "$profile_yaml" "display_name")"
+
+    log_bold "🚀 DevCompass Workstation Initialization"
+    echo "=================================================="
+    log_info "Selected Profile: ${selected_profile} ($profile_display_name)"
+    log_info "Building initialization plan..."
     echo
 
     local plan_steps=()
@@ -38,9 +51,10 @@ cmd_init() {
         plan_steps+=("Install: Homebrew package manager (via official install.sh script)")
     fi
 
-    # Step 3: Foundation Brewfile
-    local brewfile="${root_dir}/packages/workstation/brewfiles/Brewfile.foundation"
-    plan_steps+=("Install: Foundation Brewfile packages ($brewfile)")
+    # Step 3: Brewfile for Profile
+    local brewfile
+    brewfile="$(resolve_profile_brewfile "$profile_yaml")"
+    plan_steps+=("Install: $selected_profile Brewfile packages ($brewfile)")
 
     # Step 4: Baseline Configurations (Additive & Idempotent)
     local git_target="${target_home}/.gitconfig"
@@ -72,7 +86,7 @@ cmd_init() {
 
     # Explicit confirmation required
     echo
-    if ! confirm_action "Do you want to proceed with DevCompass Workstation initialization?" "N"; then
+    if ! confirm_action "Do you want to proceed with DevCompass initialization for profile '$selected_profile'?" "N"; then
         log_warn "Initialization aborted by user."
         return 3
     fi
@@ -101,22 +115,22 @@ cmd_init() {
         log_success "Homebrew verified."
     fi
 
-    # Step 3 execution: Brewfile Bundle (Exits nonzero if installation fails)
+    # Step 3 execution: Brewfile Bundle for Profile
     if [[ -f "$brewfile" ]]; then
-        log_info "Installing foundation packages via Homebrew bundle..."
+        log_info "Installing $selected_profile packages via Homebrew bundle..."
         if ! brew bundle --file="$brewfile"; then
-            log_error "Foundation package installation failed via Homebrew bundle."
+            log_error "Package installation failed for profile '$selected_profile' via Homebrew bundle."
             log_error "Initialization incomplete. Please resolve Homebrew issues and rerun 'devcompass init'."
             return 1
         fi
-        log_success "Foundation packages installed successfully."
+        log_success "$selected_profile packages installed successfully."
     fi
 
     # Step 4 execution: Managed Snippets & Additive Integration
     local devcompass_config_dir="${target_home}/.devcompass/config"
     mkdir -p "$devcompass_config_dir"
 
-    # Managed snippet copies (Preserves user customizations, avoids unnecessary rewrites)
+    # Managed snippet copies
     local git_tmpl="${root_dir}/packages/workstation/configs/git/.gitconfig"
     local managed_git="${devcompass_config_dir}/gitconfig"
     if [[ -f "$git_tmpl" ]]; then
@@ -162,6 +176,6 @@ cmd_init() {
     fi
 
     echo "=================================================="
-    log_success "DevCompass Workstation initialization complete."
+    log_success "DevCompass initialization complete for profile '$selected_profile'."
     return 0
 }

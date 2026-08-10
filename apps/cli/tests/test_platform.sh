@@ -35,8 +35,22 @@ EOF
     # 1. Test doctor on non-macOS (Linux) -> exit code 1
     assert_exit_code 1 "$CLI" doctor
 
-    # 2. Test init on non-macOS (Linux) -> exit code 2 (unsupported platform)
-    assert_exit_code 2 "$CLI" init
+    # 2. Test init on non-macOS (Linux) -> exit code 2 with no plan, prompt, or writes
+    local init_output
+    local init_exit_code
+    printf 'existing git config\n' > "${sandbox_home}/.gitconfig"
+    set +e
+    init_output="$("$CLI" init 2>&1)"
+    init_exit_code=$?
+    set -e
+    assert_equals "2" "$init_exit_code" "Init exits 2 on unsupported platform"
+    assert_contains "$init_output" "macOS-only" "Init explains macOS-only support"
+    if [[ "$init_output" == *"Selected Profile"* || "$init_output" == *"[y/N]"* ]]; then
+        assert_equals "no-plan-or-prompt" "plan-or-prompt-found" "Init performs no profile work or confirmation"
+    else
+        assert_equals "no-plan-or-prompt" "no-plan-or-prompt" "Init performs no profile work or confirmation"
+    fi
+    assert_equals "existing git config" "$(cat "${sandbox_home}/.gitconfig")" "Init performs no writes on unsupported platform"
 
     export PATH="$ORIGINAL_PATH"
     export HOME="$ORIGINAL_HOME"

@@ -1,0 +1,18 @@
+# DevCompass Workstation — Cloud & DevOps Brewfile
+# Foundation dependencies + DevOps Toolset
+
+# Include foundation packages
+brew "git"
+brew "curl"
+brew "wget"
+brew "jq"
+brew "shellcheck"
+brew "gh"
+brew "tree"
+
+# Cloud & DevOps packages
+brew "docker"
+brew "kubectl"
+brew "terraform"
+brew "awscli"
+brew "helm"

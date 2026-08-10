@@ -11,6 +11,10 @@ export DEVCOMPASS_ROOT
 # shellcheck source=apps/cli/lib/core.sh
 source "${DEVCOMPASS_ROOT}/apps/cli/lib/core.sh"
 
+# Source profiles library
+# shellcheck source=apps/cli/lib/profiles.sh
+source "${DEVCOMPASS_ROOT}/apps/cli/lib/profiles.sh"
+
 # Source checks
 # shellcheck source=apps/cli/lib/checks/system.sh
 source "${DEVCOMPASS_ROOT}/apps/cli/lib/checks/system.sh"
@@ -34,11 +38,18 @@ source "${DEVCOMPASS_ROOT}/apps/cli/lib/commands/version.sh"
 source "${DEVCOMPASS_ROOT}/apps/cli/lib/commands/doctor.sh"
 # shellcheck source=apps/cli/lib/commands/init.sh
 source "${DEVCOMPASS_ROOT}/apps/cli/lib/commands/init.sh"
+# shellcheck source=apps/cli/lib/commands/profile.sh
+source "${DEVCOMPASS_ROOT}/apps/cli/lib/commands/profile.sh"
 
 main() {
     local command=""
+    local command_args=()
+    local profile_flag=false
+    local dry_run_flag=false
+    local assume_yes_flag=false
     export DEVCOMPASS_DRY_RUN="${DEVCOMPASS_DRY_RUN:-false}"
     export DEVCOMPASS_ASSUME_YES="${DEVCOMPASS_ASSUME_YES:-false}"
+    export DEVCOMPASS_PROFILE="${DEVCOMPASS_PROFILE:-foundation}"
 
     while [[ $# -gt 0 ]]; do
         case "$1" in
@@ -55,22 +66,40 @@ main() {
                 ;;
             --dry-run)
                 export DEVCOMPASS_DRY_RUN="true"
+                dry_run_flag=true
                 ;;
             --yes|-y)
                 export DEVCOMPASS_ASSUME_YES="true"
+                assume_yes_flag=true
                 ;;
-            doctor|init|version|help)
+            --profile)
+                if [[ $# -lt 2 ]]; then
+                    log_error "--profile requires a profile name (e.g. foundation, web, data-science, devops)"
+                    exit 1
+                fi
+                export DEVCOMPASS_PROFILE="$2"
+                profile_flag=true
+                shift
+                ;;
+            --profile=*)
+                export DEVCOMPASS_PROFILE="${1#*=}"
+                profile_flag=true
+                ;;
+            doctor|init|profile|version|help)
                 if [[ -z "$command" ]]; then
                     command="$1"
                 else
-                    log_error "Multiple commands specified: $command, $1"
-                    exit 1
+                    command_args+=("$1")
                 fi
                 ;;
             *)
-                log_error "Unknown option or command: $1"
-                echo "Run 'devcompass --help' for usage."
-                exit 1
+                if [[ -n "$command" ]]; then
+                    command_args+=("$1")
+                else
+                    log_error "Unknown option or command: $1"
+                    echo "Run 'devcompass --help' for usage."
+                    exit 1
+                fi
                 ;;
         esac
         shift
@@ -80,6 +109,45 @@ main() {
         cmd_help
         exit 0
     fi
+
+    case "$command" in
+        init)
+            if [[ ${#command_args[@]} -ne 0 ]]; then
+                log_error "Unexpected arguments for 'init' command"
+                exit 1
+            fi
+            ;;
+        doctor|version|help)
+            if [[ ${#command_args[@]} -ne 0 || "$profile_flag" == "true" || "$dry_run_flag" == "true" || "$assume_yes_flag" == "true" ]]; then
+                log_error "Unsupported arguments or flags for '$command' command"
+                exit 1
+            fi
+            ;;
+        profile)
+            if [[ "$profile_flag" == "true" || "$dry_run_flag" == "true" || "$assume_yes_flag" == "true" ]]; then
+                log_error "Unsupported flags for 'profile' command"
+                exit 1
+            fi
+            case "${command_args[0]:-list}" in
+                list)
+                    if [[ ${#command_args[@]} -gt 2 ]] || { [[ ${#command_args[@]} -eq 2 ]] && [[ "${command_args[1]}" != "--json" ]]; }; then
+                        log_error "Usage: devcompass profile list [--json]"
+                        exit 1
+                    fi
+                    ;;
+                show)
+                    if [[ ${#command_args[@]} -ne 2 ]]; then
+                        log_error "Usage: devcompass profile show <id>"
+                        exit 1
+                    fi
+                    ;;
+                *)
+                    log_error "Usage: devcompass profile [list [--json]|show <id>]"
+                    exit 1
+                    ;;
+            esac
+            ;;
+    esac
 
     case "$command" in
         help)
@@ -93,6 +161,9 @@ main() {
             ;;
         init)
             cmd_init
+            ;;
+        profile)
+            cmd_profile "${command_args[@]:-}"
             ;;
     esac
 }

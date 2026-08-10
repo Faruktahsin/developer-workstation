@@ -1,0 +1,16 @@
+schema_version: "1"
+id: "web"
+display_name: "Web Engineering Profile"
+description: "Full-stack web development suite including Node.js, Yarn, and web tools"
+brewfile: "packages/workstation/brewfiles/Brewfile.web"
+extends:
+  - foundation
+packages:
+  brew:
+    - node
+    - yarn
+    - nvm
+configs:
+  git: "packages/workstation/configs/git/.gitconfig"
+  zsh: "packages/workstation/configs/shell/.zshrc"
+  vscode_settings: "packages/workstation/configs/vscode/settings.json"

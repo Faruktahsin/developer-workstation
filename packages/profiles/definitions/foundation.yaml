@@ -1,0 +1,19 @@
+schema_version: "1"
+id: "foundation"
+display_name: "Foundation Workstation"
+description: "Essential command-line utilities and core developer tools"
+brewfile: "packages/workstation/brewfiles/Brewfile.foundation"
+extends: []
+packages:
+  brew:
+    - git
+    - curl
+    - wget
+    - jq
+    - shellcheck
+    - gh
+    - tree
+configs:
+  git: "packages/workstation/configs/git/.gitconfig"
+  zsh: "packages/workstation/configs/shell/.zshrc"
+  vscode_settings: "packages/workstation/configs/vscode/settings.json"

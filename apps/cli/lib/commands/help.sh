@@ -11,11 +11,13 @@ cmd_help() {
     echo
     log_bold "COMMANDS:"
     echo "  doctor         Check system readiness and developer tool availability"
-    echo "  init           Initialize workstation setup with foundation tools"
+    echo "  init           Initialize workstation setup with specified workspace profile"
+    echo "  profile        List or inspect workspace profiles (list, show <name>)"
     echo "  version        Show DevCompass version"
     echo "  help           Show this help menu"
     echo
     log_bold "FLAGS & OPTIONS:"
+    echo "  --profile <p>  Select workspace profile (foundation, web, data-science, devops)"
     echo "  --dry-run      (Use with init) Preview actions without executing mutations"
     echo "  --yes, -y      (Use with init) Automatically confirm execution prompts"
     echo "  --help, -h     Show command help"
@@ -24,6 +26,8 @@ cmd_help() {
     echo
     log_bold "EXAMPLES:"
     echo "  devcompass doctor"
-    echo "  devcompass init --dry-run"
-    echo "  devcompass init"
+    echo "  devcompass profile list"
+    echo "  devcompass profile show web"
+    echo "  devcompass init --profile web --dry-run"
+    echo "  devcompass init --profile data-science"
 }

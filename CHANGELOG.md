@@ -5,6 +5,17 @@ All notable changes to DevCompass will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+- Workspace profiles: `foundation`, `web`, `data-science`, and `devops`.
+- Versioned profile schema with validated profile IDs and repository-scoped Brewfiles.
+- `devcompass profile list`, `devcompass profile list --json`, and `devcompass profile show <id>`.
+- Strict command/flag validation and profile schema tests.
+
+### Changed
+- `devcompass init` now supports `--profile <id>` and uses the selected profile's declared Brewfile.
+
 ## [0.1.0-foundation] - 2026-08-10
 
 ### Added

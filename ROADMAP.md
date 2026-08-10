@@ -3,8 +3,8 @@
 ## Milestone Overview
 
 ```text
-M1 — Foundation + DevCompass Workstation (IN PROGRESS)
-M2 — Workspace Profiles & Configuration
+M1 — Foundation + DevCompass Workstation (COMPLETE)
+M2 — Workspace Profiles & Configuration (COMPLETE)
 M3 — Knowledge Engine Foundation
 M4 — Search & Recommendation Engine
 M5 — Learning & Assessment
@@ -15,7 +15,7 @@ M8 — Team & Enterprise Capabilities
 
 ---
 
-### 🟢 M1 — Foundation + DevCompass Workstation (Current Status)
+### 🟢 M1 — Foundation + DevCompass Workstation (Complete)
 - [x] Canonical modular monolith structure (`apps/cli`, `packages/workstation`, `specs/`, `docs/`)
 - [x] Architectural decision records (ADR-001 through ADR-004)
 - [x] Portable Bash CLI framework (`devcompass`)
@@ -26,11 +26,14 @@ M8 — Team & Enterprise Capabilities
 - [x] Unit test suite (`apps/cli/tests/`)
 - [x] Automated CI workflow (`.github/workflows/ci.yml`)
 
-### ⚪ M2 — Workspace Profiles & Configuration
-- [ ] Profile engine (`packages/profiles`)
-- [ ] Tiered toolsets (Data Science, Web Engineering, Cloud/DevOps)
-- [ ] Custom profile definitions (`devcompass.yaml`)
-- [ ] Configuration sync and diff utilities
+### 🟢 M2 — Workspace Profiles & Configuration (Complete)
+- [x] Profile engine (`packages/profiles`)
+- [x] Validated profile schema (`schema_version`, `id`, `display_name`, `description`, `brewfile`)
+- [x] Tiered toolsets (Foundation, Web Engineering, Data Science, Cloud/DevOps)
+- [x] `devcompass profile list`, `profile list --json`, and `profile show <id>`
+- [x] Profile-aware, dry-run-first initialization
+- [ ] Custom profile definitions (`devcompass.yaml`) — deferred to a later milestone
+- [ ] Configuration sync and diff utilities — deferred to a later milestone
 
 ### ⚪ M3 — Knowledge Engine Foundation
 - [ ] Domain graph data model (Role → Skill → Tech → Tool → Playbook)

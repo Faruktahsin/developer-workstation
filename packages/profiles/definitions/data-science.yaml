@@ -1,0 +1,16 @@
+schema_version: "1"
+id: "data-science"
+display_name: "Data Science"
+description: "Python data science, Jupyter notebook environment, and analytics tooling"
+brewfile: "packages/workstation/brewfiles/Brewfile.data-science"
+extends:
+  - foundation
+packages:
+  brew:
+    - python3
+    - pyenv
+    - jupyterlab
+configs:
+  git: "packages/workstation/configs/git/.gitconfig"
+  zsh: "packages/workstation/configs/shell/.zshrc"
+  vscode_settings: "packages/workstation/configs/vscode/settings.json"

@@ -1,0 +1,18 @@
+schema_version: "1"
+id: "devops"
+display_name: "Cloud & DevOps"
+description: "Cloud infrastructure, Docker containerization, and Kubernetes management"
+brewfile: "packages/workstation/brewfiles/Brewfile.devops"
+extends:
+  - foundation
+packages:
+  brew:
+    - docker
+    - kubectl
+    - terraform
+    - awscli
+    - helm
+configs:
+  git: "packages/workstation/configs/git/.gitconfig"
+  zsh: "packages/workstation/configs/shell/.zshrc"
+  vscode_settings: "packages/workstation/configs/vscode/settings.json"
