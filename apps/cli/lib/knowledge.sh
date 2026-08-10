@@ -34,7 +34,7 @@ validate_knowledge_graph() {
     while IFS=$'\t' read -r node_id node_type node_label node_description; do
         [[ -n "$node_id" && -n "$node_type" && -n "$node_label" && -n "$node_description" ]] || { result=1; break; }
         [[ "$node_id" =~ ^[a-z0-9][a-z0-9._-]*$ ]] || { result=1; break; }
-        case "$node_type" in role|skill|technology|tool|playbook) ;; *) result=1; break ;; esac
+        case "$node_type" in role|skill|technology|tool|package|playbook) ;; *) result=1; break ;; esac
     done < <(tail -n +2 "$nodes_file")
 
     [[ $result -eq 0 ]] || return 1
@@ -42,7 +42,7 @@ validate_knowledge_graph() {
 
     while IFS=$'\t' read -r source_id relation target_id; do
         [[ -n "$source_id" && -n "$relation" && -n "$target_id" ]] || { result=1; break; }
-        case "$relation" in requires|uses|guides_to) ;; *) result=1; break ;; esac
+        case "$relation" in requires|uses|guides_to|depends_on) ;; *) result=1; break ;; esac
         if ! knowledge_node_exists "$source_id" || ! knowledge_node_exists "$target_id"; then
             result=1
             break

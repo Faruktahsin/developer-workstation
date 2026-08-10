@@ -2,16 +2,22 @@ id	type	label	description
 role.backend	role	Backend Developer	Builds reliable services and APIs.
 role.web	role	Web Developer	Builds user-facing web applications.
 role.devops	role	DevOps Engineer	Operates infrastructure and delivery systems.
+role.data-science	role	Data Scientist	Builds data analysis and machine learning workflows.
 skill.git	skill	Git	Tracks source changes and collaborates safely.
 skill.linux	skill	Linux Fundamentals	Uses the command line and operating-system concepts.
 skill.networking	skill	Networking Fundamentals	Understands HTTP, DNS, ports, and service connectivity.
 skill.python	skill	Python	Builds automation, services, and data workflows.
 skill.javascript	skill	JavaScript	Builds interactive browser and server applications.
 skill.containers	skill	Containers	Packages and runs software consistently.
+skill.data-analysis	skill	Data Analysis	Explores, cleans, and communicates insights from data.
 technology.docker	technology	Docker	Container platform for building and running images.
 technology.nodejs	technology	Node.js	JavaScript runtime for server-side development.
 tool.git	tool	Git CLI	Command-line source-control client.
 tool.docker	tool	Docker CLI	Command-line container management client.
+package.numpy	package	NumPy	Python numerical computing package.
+package.pandas	package	Pandas	Python tabular data analysis package.
+package.matplotlib	package	Matplotlib	Python data visualization package.
 playbook.backend-foundation	playbook	Backend Foundations	A prerequisite-first backend learning path.
 playbook.web-foundation	playbook	Web Foundations	A prerequisite-first web development learning path.
 playbook.devops-foundation	playbook	DevOps Foundations	A prerequisite-first DevOps learning path.
+playbook.data-science-foundation	playbook	Data Science Foundations	A beginner-friendly Python data science path.

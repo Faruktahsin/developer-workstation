@@ -14,6 +14,13 @@ role.devops	requires	skill.networking
 role.devops	requires	skill.containers
 role.devops	uses	technology.docker
 role.devops	guides_to	playbook.devops-foundation
+role.data-science	requires	skill.python
+role.data-science	requires	skill.data-analysis
+role.data-science	guides_to	playbook.data-science-foundation
 skill.containers	uses	technology.docker
 technology.docker	uses	tool.docker
 skill.git	uses	tool.git
+skill.data-analysis	depends_on	skill.python
+package.numpy	depends_on	skill.python
+package.pandas	depends_on	package.numpy
+package.matplotlib	depends_on	package.numpy

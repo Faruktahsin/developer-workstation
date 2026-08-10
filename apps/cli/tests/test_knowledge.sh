@@ -11,8 +11,8 @@ test_knowledge_engine() {
 
     output="$("$CLI" knowledge status)"
     assert_contains "$output" "Graph status : valid" "Knowledge status reports a valid graph"
-    assert_contains "$output" "Nodes        : 16" "Knowledge status reports node count"
-    assert_contains "$output" "Edges        : 18" "Knowledge status reports edge count"
+    assert_contains "$output" "Nodes        : 22" "Knowledge status reports node count"
+    assert_contains "$output" "Edges        : 25" "Knowledge status reports edge count"
 
     assert_exit_code 0 "$CLI" knowledge validate
 
