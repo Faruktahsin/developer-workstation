@@ -5,7 +5,7 @@
 ```text
 M1 — Foundation + DevCompass Workstation (COMPLETE)
 M2 — Workspace Profiles & Configuration (COMPLETE)
-M3 — Knowledge Engine Foundation
+M3 — Knowledge Engine Foundation (COMPLETE)
 M4 — Search & Recommendation Engine
 M5 — Learning & Assessment
 M6 — AI Context, Memory & Tool Orchestration
@@ -35,10 +35,11 @@ M8 — Team & Enterprise Capabilities
 - [ ] Custom profile definitions (`devcompass.yaml`) — deferred to a later milestone
 - [ ] Configuration sync and diff utilities — deferred to a later milestone
 
-### ⚪ M3 — Knowledge Engine Foundation
-- [ ] Domain graph data model (Role → Skill → Tech → Tool → Playbook)
-- [ ] Relational schema & offline graph database engine
-- [ ] Initial Developer Roles schema (Backend, Frontend, AI/ML Engineer)
+### 🟢 M3 — Knowledge Engine Foundation (Complete)
+- [x] Versioned offline graph data model (Role → Skill → Technology → Tool → Playbook)
+- [x] Graph validation and read-only CLI inspection commands
+- [x] Initial Backend, Web, and DevOps role nodes
+- [ ] Persistent graph database and role breadth — deferred until M4/M5 needs justify them
 
 ### ⚪ M4 — Search & Recommendation Engine
 - [ ] Graph querying and path finding algorithms

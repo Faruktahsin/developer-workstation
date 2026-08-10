@@ -18,6 +18,8 @@ source "${TEST_DIR}/test_profiles.sh"
 source "${TEST_DIR}/test_profiles_schema.sh"
 # shellcheck source=apps/cli/tests/test_cli_validation.sh
 source "${TEST_DIR}/test_cli_validation.sh"
+# shellcheck source=apps/cli/tests/test_knowledge.sh
+source "${TEST_DIR}/test_knowledge.sh"
 # shellcheck source=apps/cli/tests/test_platform.sh
 source "${TEST_DIR}/test_platform.sh"
 # shellcheck source=apps/cli/tests/test_regression_no_env_overrides.sh
@@ -34,6 +36,7 @@ main() {
     run_test_suite "Workspace Profiles & Resolution Tests" test_profiles_feature
     run_test_suite "Profile Schema Tests" test_profiles_schema
     run_test_suite "CLI Validation Tests" test_cli_validation
+    run_test_suite "Knowledge Engine Tests" test_knowledge_engine
     run_test_suite "Platform Support Tests" test_unsupported_platform
     run_test_suite "Regression Tests — No Environment Overrides" test_regression_no_env_overrides
 

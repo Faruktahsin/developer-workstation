@@ -12,6 +12,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Versioned profile schema with validated profile IDs and repository-scoped Brewfiles.
 - `devcompass profile list`, `devcompass profile list --json`, and `devcompass profile show <id>`.
 - Strict command/flag validation and profile schema tests.
+- Offline versioned knowledge graph with Role, Skill, Technology, Tool, and Playbook nodes.
+- `devcompass knowledge status`, `knowledge validate`, and `knowledge show <id>`.
 
 ### Changed
 - `devcompass init` now supports `--profile <id>` and uses the selected profile's declared Brewfile.

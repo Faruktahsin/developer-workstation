@@ -14,6 +14,8 @@ source "${DEVCOMPASS_ROOT}/apps/cli/lib/core.sh"
 # Source profiles library
 # shellcheck source=apps/cli/lib/profiles.sh
 source "${DEVCOMPASS_ROOT}/apps/cli/lib/profiles.sh"
+# shellcheck source=apps/cli/lib/knowledge.sh
+source "${DEVCOMPASS_ROOT}/apps/cli/lib/knowledge.sh"
 
 # Source checks
 # shellcheck source=apps/cli/lib/checks/system.sh
@@ -40,6 +42,8 @@ source "${DEVCOMPASS_ROOT}/apps/cli/lib/commands/doctor.sh"
 source "${DEVCOMPASS_ROOT}/apps/cli/lib/commands/init.sh"
 # shellcheck source=apps/cli/lib/commands/profile.sh
 source "${DEVCOMPASS_ROOT}/apps/cli/lib/commands/profile.sh"
+# shellcheck source=apps/cli/lib/commands/knowledge.sh
+source "${DEVCOMPASS_ROOT}/apps/cli/lib/commands/knowledge.sh"
 
 main() {
     local command=""
@@ -85,7 +89,7 @@ main() {
                 export DEVCOMPASS_PROFILE="${1#*=}"
                 profile_flag=true
                 ;;
-            doctor|init|profile|version|help)
+            doctor|init|profile|knowledge|version|help)
                 if [[ -z "$command" ]]; then
                     command="$1"
                 else
@@ -147,6 +151,26 @@ main() {
                     ;;
             esac
             ;;
+        knowledge)
+            case "${command_args[0]:-status}" in
+                status|validate)
+                    if [[ ${#command_args[@]} -gt 1 ]]; then
+                        log_error "Usage: devcompass knowledge ${command_args[0]}"
+                        exit 1
+                    fi
+                    ;;
+                show)
+                    if [[ ${#command_args[@]} -ne 2 ]]; then
+                        log_error "Usage: devcompass knowledge show <id>"
+                        exit 1
+                    fi
+                    ;;
+                *)
+                    log_error "Usage: devcompass knowledge [status|validate|show <id>]"
+                    exit 1
+                    ;;
+            esac
+            ;;
     esac
 
     case "$command" in
@@ -164,6 +188,9 @@ main() {
             ;;
         profile)
             cmd_profile "${command_args[@]:-}"
+            ;;
+        knowledge)
+            cmd_knowledge "${command_args[@]:-}"
             ;;
     esac
 }

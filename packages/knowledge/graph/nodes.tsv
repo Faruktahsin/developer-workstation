@@ -1,0 +1,17 @@
+id	type	label	description
+role.backend	role	Backend Developer	Builds reliable services and APIs.
+role.web	role	Web Developer	Builds user-facing web applications.
+role.devops	role	DevOps Engineer	Operates infrastructure and delivery systems.
+skill.git	skill	Git	Tracks source changes and collaborates safely.
+skill.linux	skill	Linux Fundamentals	Uses the command line and operating-system concepts.
+skill.networking	skill	Networking Fundamentals	Understands HTTP, DNS, ports, and service connectivity.
+skill.python	skill	Python	Builds automation, services, and data workflows.
+skill.javascript	skill	JavaScript	Builds interactive browser and server applications.
+skill.containers	skill	Containers	Packages and runs software consistently.
+technology.docker	technology	Docker	Container platform for building and running images.
+technology.nodejs	technology	Node.js	JavaScript runtime for server-side development.
+tool.git	tool	Git CLI	Command-line source-control client.
+tool.docker	tool	Docker CLI	Command-line container management client.
+playbook.backend-foundation	playbook	Backend Foundations	A prerequisite-first backend learning path.
+playbook.web-foundation	playbook	Web Foundations	A prerequisite-first web development learning path.
+playbook.devops-foundation	playbook	DevOps Foundations	A prerequisite-first DevOps learning path.

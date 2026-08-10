@@ -13,6 +13,7 @@ cmd_help() {
     echo "  doctor         Check system readiness and developer tool availability"
     echo "  init           Initialize workstation setup with specified workspace profile"
     echo "  profile        List or inspect workspace profiles (list, show <name>)"
+    echo "  knowledge      Inspect the offline developer knowledge graph"
     echo "  version        Show DevCompass version"
     echo "  help           Show this help menu"
     echo
@@ -28,6 +29,8 @@ cmd_help() {
     echo "  devcompass doctor"
     echo "  devcompass profile list"
     echo "  devcompass profile show web"
+    echo "  devcompass knowledge status"
+    echo "  devcompass knowledge show role.backend"
     echo "  devcompass init --profile web --dry-run"
     echo "  devcompass init --profile data-science"
 }

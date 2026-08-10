@@ -15,6 +15,8 @@
 
 The current release implements **Milestone 2 — Workspace Profiles & Configuration**: a zero-dependency, safe, and idempotent macOS workstation manager with validated role-oriented profiles.
 
+Milestone 3 now adds an offline, versioned knowledge graph foundation that connects developer roles, skills, technologies, tools, and playbooks.
+
 ---
 
 ## 🚀 Quick Start
@@ -34,6 +36,12 @@ Initialize your workstation (requires explicit confirmation):
 ./apps/cli/bin/devcompass init --profile foundation
 ```
 
+Inspect the knowledge graph:
+```bash
+./apps/cli/bin/devcompass knowledge status
+./apps/cli/bin/devcompass knowledge show role.backend
+```
+
 ---
 
 ## ✨ Features (Workstation Profiles MVP)
@@ -44,6 +52,7 @@ Initialize your workstation (requires explicit confirmation):
 - **Foundation Brewfile**: Default installation is strictly foundation-only (`git`, `curl`, `wget`, `jq`, `shellcheck`, `gh`).
 - **Workspace Profiles**: Choose validated `foundation`, `web`, `data-science`, or `devops` toolsets.
 - **Inspectable Profiles**: Use `devcompass profile list`, `profile list --json`, or `profile show <id>` before applying a profile.
+- **Offline Knowledge Graph**: Inspect validated Role → Skill → Technology → Tool → Playbook relationships locally.
 - **Opt-in macOS Defaults**: System defaults (UI/Dock/Finder modifications) are excluded from the default path to prevent unwanted changes.
 - **Automated Configuration Backup**: Existing configuration files (`.gitconfig`, `.zshrc`) are backed up to timestamped files prior to any updates.
 
@@ -77,6 +86,7 @@ DevCompass follows a **Modular Monolith** architecture governed by Clean Archite
 - [ADR-003: CLI Contract & Lifecycle](specs/adr/ADR-003-cli-contract.md)
 - [ADR-004: Safe, Idempotent Workstation Changes](specs/adr/ADR-004-safe-idempotent-changes.md)
 - [ADR-005: Workspace Profiles and Configuration Schema](specs/adr/ADR-005-workspace-profiles-schema.md)
+- [ADR-006: Offline Knowledge Graph Foundation](specs/adr/ADR-006-offline-knowledge-graph.md)
 
 ---
 
@@ -105,7 +115,7 @@ make install
 
 - [x] **M1 — Foundation + DevCompass Workstation MVP**
 - [x] **M2 — Workspace Profiles & Configuration**
-- [ ] **M3 — Knowledge Engine Foundation**
+- [x] **M3 — Knowledge Engine Foundation**
 - [ ] **M4 — Search & Recommendation Engine**
 - [ ] **M5 — Learning & Assessment**
 - [ ] **M6 — AI Context, Memory & Tool Orchestration**
