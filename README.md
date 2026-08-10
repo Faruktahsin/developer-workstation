@@ -15,7 +15,7 @@
 
 The current release implements **Milestone 2 — Workspace Profiles & Configuration**: a zero-dependency, safe, and idempotent macOS workstation manager with validated role-oriented profiles.
 
-Milestone 3 now adds an offline, versioned knowledge graph foundation that connects developer roles, skills, technologies, tools, and playbooks.
+Milestone 3 adds an offline, versioned knowledge graph foundation. Milestone 4 now uses that graph to generate explainable role roadmaps without requiring an AI provider or network access.
 
 ---
 
@@ -42,6 +42,12 @@ Inspect the knowledge graph:
 ./apps/cli/bin/devcompass knowledge show role.backend
 ```
 
+Generate an explainable role roadmap:
+```bash
+./apps/cli/bin/devcompass recommend --role role.devops
+./apps/cli/bin/devcompass recommend --role role.web --format json
+```
+
 ---
 
 ## ✨ Features (Workstation Profiles MVP)
@@ -53,6 +59,7 @@ Inspect the knowledge graph:
 - **Workspace Profiles**: Choose validated `foundation`, `web`, `data-science`, or `devops` toolsets.
 - **Inspectable Profiles**: Use `devcompass profile list`, `profile list --json`, or `profile show <id>` before applying a profile.
 - **Offline Knowledge Graph**: Inspect validated Role → Skill → Technology → Tool → Playbook relationships locally.
+- **Explainable Role Roadmaps**: Generate deterministic role requirements and directly used tools from the local graph. This is intentionally not yet a personalized or prerequisite-ranked learning path.
 - **Opt-in macOS Defaults**: System defaults (UI/Dock/Finder modifications) are excluded from the default path to prevent unwanted changes.
 - **Automated Configuration Backup**: Existing configuration files (`.gitconfig`, `.zshrc`) are backed up to timestamped files prior to any updates.
 
@@ -65,6 +72,7 @@ Inspect the knowledge graph:
 ├── apps/
 │   └── cli/                    # DevCompass CLI dispatcher & test suite
 ├── packages/
+│   ├── knowledge/              # Offline role, skill, technology, tool, and playbook graph
 │   └── workstation/            # Foundation Brewfiles & baseline configs
 ├── docs/                       # Audit reports & migration plans
 ├── specs/                      # Architecture blueprints & ADRs
@@ -116,7 +124,7 @@ make install
 - [x] **M1 — Foundation + DevCompass Workstation MVP**
 - [x] **M2 — Workspace Profiles & Configuration**
 - [x] **M3 — Knowledge Engine Foundation**
-- [ ] **M4 — Search & Recommendation Engine**
+- [x] **M4 — Search & Recommendation Engine (role-roadmap MVP)**
 - [ ] **M5 — Learning & Assessment**
 - [ ] **M6 — AI Context, Memory & Tool Orchestration**
 - [ ] **M7 — Plugin System (WASM)**

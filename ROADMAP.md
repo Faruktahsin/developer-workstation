@@ -6,7 +6,7 @@
 M1 — Foundation + DevCompass Workstation (COMPLETE)
 M2 — Workspace Profiles & Configuration (COMPLETE)
 M3 — Knowledge Engine Foundation (COMPLETE)
-M4 — Search & Recommendation Engine
+M4 — Search & Recommendation Engine (role-roadmap MVP COMPLETE)
 M5 — Learning & Assessment
 M6 — AI Context, Memory & Tool Orchestration
 M7 — Plugin System (WASM)
@@ -41,10 +41,12 @@ M8 — Team & Enterprise Capabilities
 - [x] Initial Backend, Web, and DevOps role nodes
 - [ ] Persistent graph database and role breadth — deferred until M4/M5 needs justify them
 
-### ⚪ M4 — Search & Recommendation Engine
-- [ ] Graph querying and path finding algorithms
-- [ ] Contextual gap detection for developer profiles
-- [ ] Explainable step-by-step recommendations
+### 🟢 M4 — Search & Recommendation Engine (Role-roadmap MVP Complete)
+- [x] `devcompass recommend --role <role-id>` role-roadmap command
+- [x] Deterministic graph traversal of `requires` and directly used `uses` relationships
+- [x] Plain and JSON recommendation output with scope explanation
+- [ ] Personalized skill-gap detection — deferred to M5
+- [ ] True prerequisite-ranked learning paths — deferred until the graph models prerequisite relationships
 
 ### ⚪ M5 — Learning & Assessment
 - [ ] Skill assessment engine

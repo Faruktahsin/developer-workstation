@@ -16,6 +16,8 @@ source "${DEVCOMPASS_ROOT}/apps/cli/lib/core.sh"
 source "${DEVCOMPASS_ROOT}/apps/cli/lib/profiles.sh"
 # shellcheck source=apps/cli/lib/knowledge.sh
 source "${DEVCOMPASS_ROOT}/apps/cli/lib/knowledge.sh"
+# shellcheck source=apps/cli/lib/recommendations.sh
+source "${DEVCOMPASS_ROOT}/apps/cli/lib/recommendations.sh"
 
 # Source checks
 # shellcheck source=apps/cli/lib/checks/system.sh
@@ -44,6 +46,8 @@ source "${DEVCOMPASS_ROOT}/apps/cli/lib/commands/init.sh"
 source "${DEVCOMPASS_ROOT}/apps/cli/lib/commands/profile.sh"
 # shellcheck source=apps/cli/lib/commands/knowledge.sh
 source "${DEVCOMPASS_ROOT}/apps/cli/lib/commands/knowledge.sh"
+# shellcheck source=apps/cli/lib/commands/recommend.sh
+source "${DEVCOMPASS_ROOT}/apps/cli/lib/commands/recommend.sh"
 
 main() {
     local command=""
@@ -89,7 +93,7 @@ main() {
                 export DEVCOMPASS_PROFILE="${1#*=}"
                 profile_flag=true
                 ;;
-            doctor|init|profile|knowledge|version|help)
+            doctor|init|profile|knowledge|recommend|version|help)
                 if [[ -z "$command" ]]; then
                     command="$1"
                 else
@@ -171,6 +175,12 @@ main() {
                     ;;
             esac
             ;;
+        recommend)
+            if [[ "$profile_flag" == "true" || "$dry_run_flag" == "true" || "$assume_yes_flag" == "true" ]]; then
+                log_error "Unsupported global flags for 'recommend' command"
+                exit 1
+            fi
+            ;;
     esac
 
     case "$command" in
@@ -191,6 +201,9 @@ main() {
             ;;
         knowledge)
             cmd_knowledge "${command_args[@]:-}"
+            ;;
+        recommend)
+            cmd_recommend "${command_args[@]:-}"
             ;;
     esac
 }

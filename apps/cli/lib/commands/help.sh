@@ -14,6 +14,7 @@ cmd_help() {
     echo "  init           Initialize workstation setup with specified workspace profile"
     echo "  profile        List or inspect workspace profiles (list, show <name>)"
     echo "  knowledge      Inspect the offline developer knowledge graph"
+    echo "  recommend      Generate an explainable role roadmap from the knowledge graph"
     echo "  version        Show DevCompass version"
     echo "  help           Show this help menu"
     echo
@@ -31,6 +32,8 @@ cmd_help() {
     echo "  devcompass profile show web"
     echo "  devcompass knowledge status"
     echo "  devcompass knowledge show role.backend"
+    echo "  devcompass recommend --role role.devops"
+    echo "  devcompass recommend --role role.web --format json"
     echo "  devcompass init --profile web --dry-run"
     echo "  devcompass init --profile data-science"
 }
