@@ -1,0 +1,25 @@
+# DevCompass Baseline Git Configuration
+
+[core]
+    autocrlf = input
+    editor = vim
+    whitespace = error-trailing-space,space-before-tab
+
+[init]
+    defaultBranch = main
+
+[pull]
+    rebase = false
+
+[push]
+    default = current
+
+[color]
+    ui = auto
+
+[alias]
+    st = status
+    co = checkout
+    br = branch
+    ci = commit
+    lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit

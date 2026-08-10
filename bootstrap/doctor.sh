@@ -1,31 +1,15 @@
 #!/usr/bin/env bash
 
+# DEPRECATED: bootstrap/doctor.sh is preserved for backwards compatibility.
+# Use 'devcompass doctor' instead.
+
 set -Eeuo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
 
-# shellcheck source=bootstrap/lib/logging.sh
-source "$SCRIPT_DIR/lib/logging.sh"
+echo "⚠ DEPRECATION NOTICE: bootstrap/doctor.sh is deprecated."
+echo "ℹ Redirecting to 'devcompass doctor'..."
+echo
 
-# shellcheck source=bootstrap/lib/checks.sh
-source "$SCRIPT_DIR/lib/checks.sh"
-
-main() {
-    echo
-    echo "🩺 Developer Workstation Doctor"
-    echo
-
-    check_macos
-
-    log_info "Checking development tools..."
-
-    require_command git
-    require_command brew
-    require_command python3
-    require_command gh
-
-    echo
-    log_success "System health check completed."
-}
-
-main "$@"
+exec "${REPO_ROOT}/apps/cli/bin/devcompass" doctor "$@"

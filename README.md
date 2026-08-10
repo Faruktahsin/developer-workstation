@@ -1,146 +1,124 @@
-# 🚀 Developer Workstation
+# 🧩 DevCompass
 
-> A production-ready macOS developer workstation for Python, AI, Cloud, and Software Engineering.
+> The Developer Operating System platform for modern software engineers.
 
-![CI](https://github.com/Faruktahsin/developer-workstation/actions/workflows/ci.yml/badge.svg)
+[![CI](https://github.com/Faruktahsin/developer-workstation/actions/workflows/ci.yml/badge.svg)](https://github.com/Faruktahsin/developer-workstation/actions/workflows/ci.yml)
 ![Platform](https://img.shields.io/badge/platform-macOS-black)
-![Python](https://img.shields.io/badge/python-3.14+-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
-![Status](https://img.shields.io/badge/status-Under%20Development-orange)
+![Status](https://img.shields.io/badge/status-M1%20Workstation%20MVP-blue)
 
 ---
 
 ## 📖 Overview
 
-Developer Workstation is an open-source project designed to automate the setup and maintenance of a modern macOS development environment.
+**DevCompass** is not a simple installer script. It is an open-source **Developer Operating System** platform designed to understand developer roles, skills, and tools, delivering personalized workstation setups, playbooks, and pathing.
 
-The goal is simple:
-
-> Buy a new Mac → Clone this repository → Run one command → Start coding.
-
-Instead of spending hours installing software manually, this project provides a reproducible, maintainable, and documented workstation.
+The initial release implements **Milestone 1 — DevCompass Workstation**: a zero-dependency, safe, and idempotent workstation manager for macOS.
 
 ---
 
-## 🎯 Goals
+## 🚀 Quick Start
 
-- Fully reproducible development environment
-- Professional developer tooling
-- Easy onboarding for new machines
-- Version-controlled configuration
-- Automation-first philosophy
-- Clean and maintainable architecture
+Run system readiness diagnostic:
+```bash
+./apps/cli/bin/devcompass doctor
+```
 
----
+Preview initialization plan without system changes (Dry-Run):
+```bash
+./apps/cli/bin/devcompass init --dry-run
+```
 
-## ✨ Planned Features
-
-- Homebrew package management
-- Python development environment
-- Docker installation and verification
-- AWS CLI configuration
-- VS Code configuration
-- Git configuration
-- Shell customization
-- Health check utilities
-- Automatic updates
-- Backup & restore
-- GitHub Actions
-- Documentation
+Initialize your workstation (requires explicit confirmation):
+```bash
+./apps/cli/bin/devcompass init
+```
 
 ---
 
-## 📂 Project Structure
+## ✨ Features (Workstation MVP)
+
+- **Zero-Dependency Core**: Built in portable Bash 4+ (`set -Eeuo pipefail`) — no pre-installed Python, Go, or Node required.
+- **Safe & Non-Destructive**: `devcompass init` requires explicit interactive confirmation (`[y/N]`).
+- **Dry-Run Preview**: Inspect every planned system modification with `--dry-run`.
+- **Foundation Brewfile**: Default installation is strictly foundation-only (`git`, `curl`, `wget`, `jq`, `shellcheck`, `gh`).
+- **Opt-in macOS Defaults**: System defaults (UI/Dock/Finder modifications) are excluded from the default path to prevent unwanted changes.
+- **Automated Configuration Backup**: Existing configuration files (`.gitconfig`, `.zshrc`) are backed up to timestamped files prior to any updates.
+
+---
+
+## 📂 Repository Structure
 
 ```text
-developer-workstation/
-
-├── .github/
-├── assets/
-├── bootstrap/
-├── config/
-├── docs/
-├── python/
-├── scripts/
-├── tests/
-├── Brewfile
+.
+├── apps/
+│   └── cli/                    # DevCompass CLI dispatcher & test suite
+├── packages/
+│   └── workstation/            # Foundation Brewfiles & baseline configs
+├── docs/                       # Audit reports & migration plans
+├── specs/                      # Architecture blueprints & ADRs
+├── Makefile                    # Developer workflow targets
 └── README.md
 ```
 
----
-
-## 🚀 Current Status
-
-Current version:
-
-```
-v0.1.0 (Foundation)
-```
-
-Completed:
-
-- Repository initialized
-- Professional project structure
-- Documentation started
-
-Next milestone:
-
-- Bootstrap automation
+See [REPOSITORY_BLUEPRINT.md](REPOSITORY_BLUEPRINT.md) for full structural details.
 
 ---
 
-## 🛠 Tech Stack
+## 🏛 Architecture & ADRs
 
-- macOS
-- Homebrew
-- Git
-- GitHub CLI
-- Python
-- Docker
-- AWS CLI
-- Visual Studio Code
-- Bash
+DevCompass follows a **Modular Monolith** architecture governed by Clean Architecture, Hexagonal Architecture, and DDD.
+
+- [ARCHITECTURE.md](ARCHITECTURE.md)
+- [ADR-001: Product Boundary & Workstation Module](specs/adr/ADR-001-product-boundary.md)
+- [ADR-002: Modular Monolith Architecture](specs/adr/ADR-002-modular-monolith.md)
+- [ADR-003: CLI Contract & Lifecycle](specs/adr/ADR-003-cli-contract.md)
+- [ADR-004: Safe, Idempotent Workstation Changes](specs/adr/ADR-004-safe-idempotent-changes.md)
+
+---
+
+## 🛠 Local Development
+
+```bash
+# Validate shell syntax & run ShellCheck
+make lint
+
+# Run unit test suite (19 test cases)
+make test
+
+# Run CLI smoke tests
+make smoke
+
+# Run all checks
+make check
+
+# Symlink devcompass to /usr/local/bin
+make install
+```
 
 ---
 
 ## 📈 Roadmap
 
-### v0.1
+- [x] **M1 — Foundation + DevCompass Workstation MVP**
+- [ ] **M2 — Workspace Profiles & Configuration**
+- [ ] **M3 — Knowledge Engine Foundation**
+- [ ] **M4 — Search & Recommendation Engine**
+- [ ] **M5 — Learning & Assessment**
+- [ ] **M6 — AI Context, Memory & Tool Orchestration**
+- [ ] **M7 — Plugin System (WASM)**
+- [ ] **M8 — Team & Enterprise Capabilities**
 
-- Repository structure
-- Documentation
-- Standards
-
-### v0.2
-
-- Bootstrap installer
-
-### v0.3
-
-- Environment health check
-
-### v0.4
-
-- Update automation
-
-### v0.5
-
-- Backup & Restore
-
-### v1.0
-
-- Production-ready automated developer workstation
+See [ROADMAP.md](ROADMAP.md) for full details.
 
 ---
 
 ## 🤝 Contributing
 
-Contributions, suggestions, and improvements are welcome.
-
-Please open an Issue or Pull Request.
+Contributions are welcome! Please read [CONTRIBUTING.md](CONTRIBUTING.md) and [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) before submitting pull requests.
 
 ---
 
 ## 📄 License
 
-This project will be released under the MIT License.
+Released under the [MIT License](LICENSE).

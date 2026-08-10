@@ -1,0 +1,100 @@
+#!/usr/bin/env bash
+
+set -Eeuo pipefail
+
+# Resolve canonical DevCompass root directory
+BIN_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+DEVCOMPASS_ROOT="$(cd "${BIN_DIR}/../../.." && pwd)"
+export DEVCOMPASS_ROOT
+
+# Source core library
+# shellcheck source=apps/cli/lib/core.sh
+source "${DEVCOMPASS_ROOT}/apps/cli/lib/core.sh"
+
+# Source checks
+# shellcheck source=apps/cli/lib/checks/system.sh
+source "${DEVCOMPASS_ROOT}/apps/cli/lib/checks/system.sh"
+# shellcheck source=apps/cli/lib/checks/xcode.sh
+source "${DEVCOMPASS_ROOT}/apps/cli/lib/checks/xcode.sh"
+# shellcheck source=apps/cli/lib/checks/homebrew.sh
+source "${DEVCOMPASS_ROOT}/apps/cli/lib/checks/homebrew.sh"
+# shellcheck source=apps/cli/lib/checks/git.sh
+source "${DEVCOMPASS_ROOT}/apps/cli/lib/checks/git.sh"
+# shellcheck source=apps/cli/lib/checks/python.sh
+source "${DEVCOMPASS_ROOT}/apps/cli/lib/checks/python.sh"
+# shellcheck source=apps/cli/lib/checks/node.sh
+source "${DEVCOMPASS_ROOT}/apps/cli/lib/checks/node.sh"
+
+# Source commands
+# shellcheck source=apps/cli/lib/commands/help.sh
+source "${DEVCOMPASS_ROOT}/apps/cli/lib/commands/help.sh"
+# shellcheck source=apps/cli/lib/commands/version.sh
+source "${DEVCOMPASS_ROOT}/apps/cli/lib/commands/version.sh"
+# shellcheck source=apps/cli/lib/commands/doctor.sh
+source "${DEVCOMPASS_ROOT}/apps/cli/lib/commands/doctor.sh"
+# shellcheck source=apps/cli/lib/commands/init.sh
+source "${DEVCOMPASS_ROOT}/apps/cli/lib/commands/init.sh"
+
+main() {
+    local command=""
+    export DEVCOMPASS_DRY_RUN="${DEVCOMPASS_DRY_RUN:-false}"
+    export DEVCOMPASS_ASSUME_YES="${DEVCOMPASS_ASSUME_YES:-false}"
+
+    while [[ $# -gt 0 ]]; do
+        case "$1" in
+            --help|-h)
+                cmd_help
+                exit 0
+                ;;
+            --version|-v)
+                cmd_version
+                exit 0
+                ;;
+            --no-color)
+                export NO_COLOR="1"
+                ;;
+            --dry-run)
+                export DEVCOMPASS_DRY_RUN="true"
+                ;;
+            --yes|-y)
+                export DEVCOMPASS_ASSUME_YES="true"
+                ;;
+            doctor|init|version|help)
+                if [[ -z "$command" ]]; then
+                    command="$1"
+                else
+                    log_error "Multiple commands specified: $command, $1"
+                    exit 1
+                fi
+                ;;
+            *)
+                log_error "Unknown option or command: $1"
+                echo "Run 'devcompass --help' for usage."
+                exit 1
+                ;;
+        esac
+        shift
+    done
+
+    if [[ -z "$command" ]]; then
+        cmd_help
+        exit 0
+    fi
+
+    case "$command" in
+        help)
+            cmd_help
+            ;;
+        version)
+            cmd_version
+            ;;
+        doctor)
+            cmd_doctor
+            ;;
+        init)
+            cmd_init
+            ;;
+    esac
+}
+
+main "$@"

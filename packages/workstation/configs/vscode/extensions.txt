@@ -1,0 +1,3 @@
+eamodio.gitlens
+timonwong.shellcheck
+ms-vscode.makefile-tools

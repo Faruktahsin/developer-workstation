@@ -2,30 +2,26 @@ name: CI
 
 on:
   push:
-    branches: [main]
+    branches: [main, develop]
   pull_request:
+    branches: [main, develop]
 
 jobs:
   validate:
-    name: Validate Shell Scripts
+    name: DevCompass CI Pipeline
     runs-on: macos-latest
 
     steps:
       - uses: actions/checkout@v4
 
       - name: Install ShellCheck
-        run: brew install shellcheck
+        run: brew install shellcheck || true
 
-      - name: Bash Syntax Check
-        run: |
-          find bootstrap scripts -name "*.sh" -print0 | while IFS= read -r -d '' file; do
-            echo "Checking syntax: $file"
-            bash -n "$file"
-          done
+      - name: Validate Syntax & ShellCheck
+        run: make lint
 
-      - name: ShellCheck
-        run: |
-          find bootstrap scripts -name "*.sh" -print0 | while IFS= read -r -d '' file; do
-            echo "Linting: $file"
-            shellcheck "$file"
-          done
+      - name: Run Test Suite
+        run: make test
+
+      - name: Run Smoke Tests
+        run: make smoke

@@ -1,0 +1,13 @@
+# DevCompass Workstation — Foundation Brewfile
+# Essential tools required for developer workstation setup
+
+# Core CLI Tools
+brew "git"
+brew "curl"
+brew "wget"
+brew "jq"
+brew "shellcheck"
+brew "gh"
+
+# Basic developer dependencies
+brew "tree"
