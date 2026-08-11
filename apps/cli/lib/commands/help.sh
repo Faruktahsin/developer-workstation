@@ -16,6 +16,7 @@ cmd_help() {
     echo "  knowledge      Inspect the offline developer knowledge graph"
     echo "  recommend      Generate a role roadmap or prerequisite path from the graph"
     echo "  setup          Create a safe, role-oriented learning environment"
+    echo "  assess         Run an offline developer diagnostic assessment"
     echo "  version        Show DevCompass version"
     echo "  help           Show this help menu"
     echo
@@ -36,6 +37,7 @@ cmd_help() {
     echo "  devcompass recommend --role role.devops"
     echo "  devcompass recommend --role role.web --format json"
     echo "  devcompass recommend path --goal package.pandas"
+    echo "  devcompass assess --role role.data-science"
     echo "  devcompass setup python --track data-science --level beginner --dry-run"
     echo "  devcompass init --profile web --dry-run"
     echo "  devcompass init --profile data-science"

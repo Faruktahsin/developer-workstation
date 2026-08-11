@@ -30,6 +30,7 @@ smoke:
 	@./apps/cli/bin/devcompass recommend --role role.web --format json >/dev/null
 	@./apps/cli/bin/devcompass recommend path --goal package.pandas --format json >/dev/null
 	@./apps/cli/bin/devcompass setup python --track data-science --level beginner --dry-run >/dev/null
+	@./apps/cli/bin/devcompass assess --role role.data-science --answers 1,1,1 >/dev/null
 	@echo "✓ Smoke tests passed."
 
 check: lint test smoke

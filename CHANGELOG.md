@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `devcompass recommend path --goal <node-id>` with deterministic prerequisite-first paths over `depends_on` relationships.
 - `devcompass setup python --track data-science --level beginner` for an explicit-confirmation, isolated Python learning environment.
 - Versioned Data Science beginner recipe for NumPy, pandas, and Matplotlib.
+- `devcompass assess --role role.data-science` offline diagnostic assessment with interactive and automation-friendly answer modes.
 
 ### Changed
 - `devcompass init` now supports `--profile <id>` and uses the selected profile's declared Brewfile.

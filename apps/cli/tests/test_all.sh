@@ -24,6 +24,8 @@ source "${TEST_DIR}/test_knowledge.sh"
 source "${TEST_DIR}/test_recommend.sh"
 # shellcheck source=apps/cli/tests/test_setup.sh
 source "${TEST_DIR}/test_setup.sh"
+# shellcheck source=apps/cli/tests/test_assess.sh
+source "${TEST_DIR}/test_assess.sh"
 # shellcheck source=apps/cli/tests/test_platform.sh
 source "${TEST_DIR}/test_platform.sh"
 # shellcheck source=apps/cli/tests/test_regression_no_env_overrides.sh
@@ -43,6 +45,7 @@ main() {
     run_test_suite "Knowledge Engine Tests" test_knowledge_engine
     run_test_suite "Recommendation Engine Tests" test_recommendation_engine
     run_test_suite "Learning Environment Setup Tests" test_learning_environment_setup
+    run_test_suite "Learning Assessment Tests" test_assessment_engine
     run_test_suite "Platform Support Tests" test_unsupported_platform
     run_test_suite "Regression Tests — No Environment Overrides" test_regression_no_env_overrides
 

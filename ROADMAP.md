@@ -65,9 +65,10 @@ M8 — Team & Enterprise Capabilities
 - [x] Dependency-first ordering and cycle protection
 - [x] First examples: Python → NumPy → Pandas and Python → Data Analysis
 
-### ⚪ M5 — Learning & Assessment
-- [ ] Skill assessment engine
-- [ ] Interactive developer diagnostic quizzes
+### 🟡 M5 — Learning & Assessment (In Progress)
+- [x] Offline Data Science diagnostic assessment: `devcompass assess --role role.data-science`
+- [x] Interactive terminal questions and deterministic `--answers` automation mode
+- [ ] Broader role coverage and skill-gap aggregation
 - [ ] Personalized prerequisite-ranked learning path generation
 
 ### ⚪ M6 — AI Context, Memory & Tool Orchestration

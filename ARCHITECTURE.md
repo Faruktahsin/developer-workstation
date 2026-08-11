@@ -18,7 +18,7 @@ DevCompass Platform
 - `packages/workstation`: System detection, dependency resolution, package installation (Brewfile), configuration management.
 - `packages/profiles`: Validated workspace profiles and repository-scoped toolset definitions.
 - `packages/knowledge`: Offline relational knowledge graph linking Roles → Skills → Technologies → Tools → Playbooks.
-- `packages/learning`: Versioned, opt-in learning recipes; the current Python setup flow creates isolated environments from reviewed package lists. Assessment and personalized paths remain future work.
+- `packages/learning`: Versioned learning recipes and offline assessment data; the current Python setup flow creates isolated environments, while the first Data Science diagnostic provides deterministic next-step guidance. Personalized paths remain future work.
 - `packages/ai`: (Future M6) Provider-agnostic AI memory and tool orchestration context.
 
 ### 3. Hexagonal Ports & Adapters
@@ -53,5 +53,5 @@ Role
 The current graph is a versioned TSV dataset. It validates node identity and
 relationships locally, supports role-roadmap output over `requires` and `uses`,
 and contains `depends_on` edges for learning-package prerequisites. It is not
-yet a graph database, semantic search service, personalized assessment engine,
+yet a graph database, semantic search service, personalized learning-plan engine,
 or AI system.

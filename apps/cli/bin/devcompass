@@ -20,6 +20,8 @@ source "${DEVCOMPASS_ROOT}/apps/cli/lib/knowledge.sh"
 source "${DEVCOMPASS_ROOT}/apps/cli/lib/recommendations.sh"
 # shellcheck source=apps/cli/lib/setup.sh
 source "${DEVCOMPASS_ROOT}/apps/cli/lib/setup.sh"
+# shellcheck source=apps/cli/lib/assessment.sh
+source "${DEVCOMPASS_ROOT}/apps/cli/lib/assessment.sh"
 
 # Source checks
 # shellcheck source=apps/cli/lib/checks/system.sh
@@ -52,6 +54,8 @@ source "${DEVCOMPASS_ROOT}/apps/cli/lib/commands/knowledge.sh"
 source "${DEVCOMPASS_ROOT}/apps/cli/lib/commands/recommend.sh"
 # shellcheck source=apps/cli/lib/commands/setup.sh
 source "${DEVCOMPASS_ROOT}/apps/cli/lib/commands/setup.sh"
+# shellcheck source=apps/cli/lib/commands/assess.sh
+source "${DEVCOMPASS_ROOT}/apps/cli/lib/commands/assess.sh"
 
 main() {
     local command=""
@@ -97,7 +101,7 @@ main() {
                 export DEVCOMPASS_PROFILE="${1#*=}"
                 profile_flag=true
                 ;;
-            doctor|init|profile|knowledge|recommend|setup|version|help)
+            doctor|init|profile|knowledge|recommend|setup|assess|version|help)
                 if [[ -z "$command" ]]; then
                     command="$1"
                 else
@@ -191,6 +195,12 @@ main() {
                 exit 1
             fi
             ;;
+        assess)
+            if [[ "$profile_flag" == "true" || "$dry_run_flag" == "true" || "$assume_yes_flag" == "true" ]]; then
+                log_error "Unsupported global flags for 'assess' command"
+                exit 1
+            fi
+            ;;
     esac
 
     case "$command" in
@@ -217,6 +227,9 @@ main() {
             ;;
         setup)
             cmd_setup "${command_args[@]:-}"
+            ;;
+        assess)
+            cmd_assess "${command_args[@]:-}"
             ;;
     esac
 }

@@ -1,0 +1,4 @@
+id	skill_id	prompt	options	correct_option
+python-data-types	skill.python	Which Python type is best suited to an ordered collection of values?	1) list | 2) set | 3) dict	1
+dataframe-purpose	skill.data-analysis	What is a pandas DataFrame primarily used for?	1) Tabular data | 2) Container images | 3) Git branches	1
+visualization-purpose	skill.data-analysis	What is Matplotlib primarily used for?	1) Visualizing data | 2) Managing packages | 3) Serving HTTP APIs	1
