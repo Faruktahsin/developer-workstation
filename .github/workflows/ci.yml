@@ -15,7 +15,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Install ShellCheck
-        run: brew install shellcheck || true
+        run: brew install shellcheck
 
       - name: Validate Syntax & ShellCheck
         run: make lint

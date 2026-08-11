@@ -16,16 +16,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `devcompass knowledge status`, `knowledge validate`, and `knowledge show <id>`.
 - `devcompass recommend --role <role-id>` with explainable plain and JSON role roadmaps.
 - Deterministic recommendation traversal over offline `requires` and `uses` graph relationships.
+- `devcompass recommend path --goal <node-id>` with deterministic prerequisite-first paths over `depends_on` relationships.
+- `devcompass setup python --track data-science --level beginner` for an explicit-confirmation, isolated Python learning environment.
+- Versioned Data Science beginner recipe for NumPy, pandas, and Matplotlib.
 
 ### Changed
 - `devcompass init` now supports `--profile <id>` and uses the selected profile's declared Brewfile.
+- Learning-environment reruns preserve an existing virtual environment and do not repeat pip bootstrap upgrades.
 
 ## [0.1.0-foundation] - 2026-08-10
 
 ### Added
 - Canonical DevCompass modular monolith directory structure (`apps/cli`, `packages/workstation`, `specs/`, `docs/`).
 - Architectural Decision Records: `ADR-001` through `ADR-004`.
-- Portable, zero-dependency Bash 4+ CLI dispatcher (`apps/cli/bin/devcompass`).
+- Portable, zero-dependency CLI dispatcher compatible with macOS's built-in Bash 3.2 (`apps/cli/bin/devcompass`).
 - Supported CLI commands: `devcompass --help`, `devcompass version`, `devcompass doctor`, `devcompass init --dry-run`, `devcompass init`.
 - Pre-flight system checks for macOS, Xcode CLI tools, Homebrew, Git, Python, Node.js.
 - Foundation-only Brewfile profile (`packages/workstation/brewfiles/Brewfile.foundation`).

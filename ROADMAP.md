@@ -7,6 +7,8 @@ M1 — Foundation + DevCompass Workstation (COMPLETE)
 M2 — Workspace Profiles & Configuration (COMPLETE)
 M3 — Knowledge Engine Foundation (COMPLETE)
 M4 — Search & Recommendation Engine (role-roadmap MVP COMPLETE)
+M4.1 — Safe Learning Environment Setup (COMPLETE)
+M4.2 — Deterministic Prerequisite Paths (COMPLETE)
 M5 — Learning & Assessment
 M6 — AI Context, Memory & Tool Orchestration
 M7 — Plugin System (WASM)
@@ -46,12 +48,27 @@ M8 — Team & Enterprise Capabilities
 - [x] Deterministic graph traversal of `requires` and directly used `uses` relationships
 - [x] Plain and JSON recommendation output with scope explanation
 - [ ] Personalized skill-gap detection — deferred to M5
-- [ ] True prerequisite-ranked learning paths — deferred until the graph models prerequisite relationships
+- [x] `devcompass recommend path --goal <node-id>` prerequisite-path command
+- [x] Deterministic transitive traversal of `depends_on` relationships
+- [x] Plain and JSON path output that states its ordering guarantee
+
+### 🟢 M4.1 — Safe Learning Environment Setup (Complete)
+- [x] `devcompass setup python --track data-science --level beginner`
+- [x] Reviewed NumPy, pandas, and Matplotlib recipe stored as versioned TSV
+- [x] Per-track isolated virtual environment under `~/.devcompass/environments/`
+- [x] Explicit confirmation, `--yes`, and zero-side-effect `--dry-run`
+- [x] Idempotent reruns that preserve the existing environment and skip pip bootstrap upgrades
+- [ ] More tracks, levels, and package ecosystems — deferred to M5
+
+### 🟢 M4.2 — Deterministic Prerequisite Paths (Complete)
+- [x] `devcompass recommend path --goal <node-id>` for graph-backed prerequisite sequences
+- [x] Dependency-first ordering and cycle protection
+- [x] First examples: Python → NumPy → Pandas and Python → Data Analysis
 
 ### ⚪ M5 — Learning & Assessment
 - [ ] Skill assessment engine
 - [ ] Interactive developer diagnostic quizzes
-- [ ] Personalized learning path generation
+- [ ] Personalized prerequisite-ranked learning path generation
 
 ### ⚪ M6 — AI Context, Memory & Tool Orchestration
 - [ ] Provider-agnostic LLM interface (Ollama, OpenAI, Anthropic, Gemini)
